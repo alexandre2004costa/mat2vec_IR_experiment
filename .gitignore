@@ -107,3 +107,10 @@ venv.bak/
 # pycharm
 */.idea/**
 .idea/**
+# ir2
+archive.zip
+ir2/.venv/
+ir2/data/
+ir2/models/
+ir2/12-mat2vec/runs*/
+__pycache__/

@@ -1,0 +1,20 @@
+# Python 3.12 (gensim has no wheels for 3.14+)
+gensim==4.4.0
+numpy<2.3
+scipy
+pandas
+pyarrow
+scikit-learn
+matplotlib
+tqdm
+torch
+transformers
+sentence-transformers>=3.3
+nltk
+rank-bm25
+pytrec-eval-terrier
+jupyter
+tabulate
+nbformat
+nbconvert
+ipykernel
