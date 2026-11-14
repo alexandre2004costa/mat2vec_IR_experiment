@@ -114,3 +114,7 @@ ir2/data/
 ir2/models/
 ir2/12-mat2vec/runs*/
 __pycache__/
+
+# raw arXiv snapshot (scripts read archive.zip)
+arxiv-metadata-oai-snapshot.json
+.DS_Store

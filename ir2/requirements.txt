@@ -9,10 +9,6 @@ matplotlib
 tqdm
 torch
 transformers
-sentence-transformers>=3.3
-nltk
-rank-bm25
-pytrec-eval-terrier
 jupyter
 tabulate
 nbformat
