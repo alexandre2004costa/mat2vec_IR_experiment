@@ -112,7 +112,7 @@ archive.zip
 ir2/.venv/
 ir2/data/
 ir2/models/
-ir2/12-mat2vec/runs*/
+ir2/testbed/runs*/
 __pycache__/
 
 # raw arXiv snapshot (scripts read archive.zip)

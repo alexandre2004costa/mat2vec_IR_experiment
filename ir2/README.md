@@ -1,5 +1,5 @@
 # Tshitoyan et al. (Nature 2019) on arXiv cs.IR: historical backtest
-Pair 12. The paper's word2vec pipeline (mat2vec preprocessing, skip-gram, output·input scoring) is run as a historical backtest on cs.IR, plus an embedding timeline of the field. The testbed row is in a separate repository. Plans: `reading_plan.md`, `test_plan.md`. Decision log: `NOTES.md`.
+Pair 12. The paper's word2vec pipeline (mat2vec preprocessing, skip-gram, output·input scoring) is run as a historical backtest on cs.IR, plus an embedding timeline of the field. The testbed row (code and results) is in `testbed/`; see `testbed/README.md`. Plans: `reading_plan.md`, `test_plan.md` (overview), `tests_backtest.md`, `tests_testbed.md`. Decision log: `NOTES.md`.
 
 From the repository root (Python 3.12, `pip install -r ir2/requirements.txt`, Kaggle arXiv zip as `archive.zip`):
 

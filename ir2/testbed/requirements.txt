@@ -1,0 +1,6 @@
+-r ../requirements.txt
+# extra packages used by the testbed script (ir2-testbed/testbed.py) and the demo
+sentence-transformers>=3.3
+nltk
+rank-bm25
+pytrec-eval-terrier

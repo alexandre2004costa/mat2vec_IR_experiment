@@ -2,7 +2,7 @@
 
 Final pipeline and results for Pair 12 (Tshitoyan et al., Nature 2019). Each entry gives the decision, the reason, and any deviation from the paper.
 
-Scope follows `reading_plan.md` and `test_plan.md`: the historical backtest on arXiv cs.IR (Track 1) and an embedding timeline of the field (Track 2). The testbed row and its live demo (Track 3) are in a separate repository.
+Scope follows `reading_plan.md` and `test_plan.md`: the historical backtest on arXiv cs.IR (Track 1) and an embedding timeline of the field (Track 2). The testbed row and its live demo (Track 3) are in `testbed/` (code and results in `testbed/README.md`) and go to the `ir2-testbed` repository as a pull request.
 
 ## Removed from scope (2026-11-14)
 
@@ -10,7 +10,7 @@ The following were done earlier and deleted from this repository when the plan c
 
 - **Sanity check with the authors' pretrained embeddings:** all three claims held (LiCoO2 neighbours, ferromagnetic − NiFe + IrMn → antiferromagnetic, Bi2Te3 first for "thermoelectric").
 - **Thermoelectric backtest on arXiv cond-mat.mtrl-sci:** word2vec output·input P@50 (5 years) 0.220 ± 0.010, 3.3× random (paper: ~8×); frequency 0.340.
-- **Testbed row (word2vec + SIF vs BM25 and MiniLM) and its live demo:** moved to the testbed repository.
+- **Testbed row (word2vec + SIF vs BM25 and MiniLM) and its live demo:** deleted, then restored from git into `testbed/` (paths fixed, own `requirements.txt`). Run files and demo indexes were not in git and must be regenerated.
 
 ## Setup
 
