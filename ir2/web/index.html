@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Context Lab · IR2 demo</title>
+        <link rel="stylesheet" href="styles.css">
+        <script src="script.js" defer></script>
+    </head>
+    <body>
+        <header>
+            <span>Paper 12. Timeline talk: Unsupervised word embeddings capture latent knowledge from materials science literature</span>
+            <span>Demo for Information Retrieval 2</span>
+        </header>
+
+        <main>
+            <section>
+                <h1>The Docunator 3000</h1>
+                <p>Discover whether matching word embeddings (Word2Vec + SIF) finds better documents than context learning (BM25). <br>
+                   Take a look at the results from the shared testbed.</p>
+            </section>
+
+            
+            <section>
+                <h2>Select a query</h2>
+                <div class="panel">
+                    <form id="search">
+                        <div class="controls">
+                            <label>
+                                Collection
+                                <select id="dataset">
+                                    <option value="scifact">SciFact (scientific claims)</option>
+                                    <option value="nfcorpus">NFCorpus (medical queries)</option>
+                                    <option value="arguana">ArguAna (arguments)</option>
+                                </select>
+                            </label>
+                            <label>
+                                Query string or query ID
+                                <input id="query" required maxlength="4000" placeholder="e.g. Eating less slows down biological aging" autocomplete="off">
+                            </label>
+                            <div class="buttons">
+                                <button id="submit">Compare</button>
+                                <button type="button" id="wildcard">Clear</button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="presets">
+                        <button type="button" data-dataset="scifact" data-query="212">Hero query: CR & aging</button>
+                        <button type="button" data-dataset="nfcorpus" data-query="PLAIN-1473">Failure query: kohlrabi</button>
+                    </div>
+
+                </div>
+            </section>
+
+            <p id="status" class="notice">Waiting for a query...</p>
+
+            <section id="output" hidden>
+                <h2>Results for...</h2>
+                <p id="query-title"></p>
+                <p id="labels"></p>
+                <p id="notes"></p>
+                <p id="notes-mandatory"></p>
+                <div class="columns">
+                    <section class="column">
+                        <h3>BM25</h3>
+                        <div id="bm25"></div>
+                    </section>
+                    <section class="column">
+                        <h3>Word2Vec + SIF</h3>
+                        <div id="word2vec"></div>
+                    </section>
+                </div>
+            </section>
+
+            <section>
+                <h2>Saved testbed results</h2>
+                <p>In all test queries, Word2Vec underperforms both baselines.</p>
+                <div class="panel scroll">
+                    <table>
+                        <caption>Historical nDCG@10. Word2Vec mean ± sample standard deviation across 3 seeds</caption>
+                        <thead>
+                            <tr>
+                                <th>Dataset</th>
+                                <th>Queries</th>
+                                <th>Word2Vec + SIF</th>
+                                <th>BM25</th>
+                                <th>MiniLM</th>
+                            </tr>
+                        </thead>
+                        <tbody id="scores"></tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+        <footer>
+            <strong>Some relevant notes</strong>
+            <br>
+            <span>- Local inference</span>
+            <br>
+            <span>- No training during search</span>
+            <br>
+            <span>- Free-text queries have no relevance labels</span>
+            <br>
+        </footer>
+        <p class="credits">Made by Alexandre Costa and Valentina Cadime</p>
+    </body>
+</html>
