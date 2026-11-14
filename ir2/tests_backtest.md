@@ -9,14 +9,15 @@ All commands run from the repository root with `ir2/.venv/bin/python` (Python 3.
 | Step | Script | State |
 |---|---|---|
 | Corpus | `scripts/phase1_corpus.py` | done: `data/csir.parquet` (27,929 papers), `data/cscl.parquet` (124,184) |
-| Preprocessing per cutoff | `scripts/phase2_preprocess.py` | done for the main run; **add** an option to skip the version filter (step 3) |
-| word2vec training | `scripts/phase3_train.py` | done: `models/T2016` … `models/T2023`, seeds 0–2 |
+| Preprocessing per cutoff | `scripts/phase2_preprocess.py` | done for both runs (`--no-version-filter` added 2026-11-14) |
+| word2vec training | `scripts/phase3_train.py` | done for both runs (`--variant`), seeds 0–2 |
 | SPECTER2 encoding | `scripts/phase3_encode.py` | done: `data/specter2.npy` |
-| Backtest | `scripts/phase3_backtest.py` | done with the old validity rule; **change** it to the new rule (step 2) |
-| Report | `scripts/phase3_report.py` | done; **change** the table layout (step 5) |
-| Timeline | none | **to write**: `scripts/phase4_timeline.py` (Part B) |
+| Backtest | `scripts/phase3_backtest.py` | done for both runs with the new validity rule |
+| Report | `scripts/phase3_report.py` | done: main table, leakage comparison, per-seed reading rule |
+| Checks (§8) | `scripts/phase3_checks.py` | done: all pass (`results/backtest_checks.md`) |
+| Timeline | `scripts/phase4_timeline.py` | done, including the optional word2vec part; subtopic keyword sets approved |
 
-The existing results in `results/backtest*.csv` used the old rule ("target in vocabulary", counted on cs.IR ∪ cs.CL). They are replaced, not edited, by the new runs.
+Status on 2026-11-14: every step below has been run. Results are summarized in `NOTES.md`; the old-rule results are only in git history.
 
 ## Part A: the backtest
 

@@ -163,8 +163,18 @@ def target_vector(kv, indicators, out=None):
 
 
 # ---------------------------------------------------------------- per-cutoff artefacts
-def cutoff_dir(T):
-    return MODELS / f"T{T}"
+# "main": pre-T text = papers whose first AND latest version are before T (no revised abstracts leak in).
+# "all_versions": comparison run without that filter (first version before T only). Professor's point 3.
+VARIANTS = {"main": MODELS, "all_versions": MODELS / "all_versions"}
+
+
+def cutoff_dir(T, variant="main"):
+    return VARIANTS[variant] / f"T{T}"
+
+
+def variant_suffix(variant):
+    """Suffix for result files: '' for the main run, '_all_versions' for the comparison run."""
+    return "" if variant == "main" else f"_{variant}"
 
 
 @lru_cache(maxsize=None)

@@ -1,49 +1,49 @@
-target,T,pre_T_target_docs,post_T_target_docs,target_tokens,n_candidates_all,base_rate_all,status,n_candidates_phrases,base_rate_phrases
-query_expansion,2016,71,438,query_expansion relevance_feedback,6330,0.16571879936808848,scored,717,0.12133891213389121
-recommender_systems,2016,373,8729,recommender recommenders recommendation recommendations collaborative_filtering,4026,0.5571286636860407,scored,451,0.3968957871396896
-learning_to_rank,2016,18,563,learning_to_rank lambdamart,7405,0.2734638757596219,scored,821,0.1851400730816078
-dense_retrieval,2016,0,824,,8134,0.37533808704204574,target not in vocabulary,890,0.23820224719101124
-conversational_search,2016,0,370,,8134,0.2421932628473076,target not in vocabulary,890,0.14606741573033707
-retrieval_augmented_generation,2016,0,2136,,8134,0.5671256454388984,target not in vocabulary,890,0.37191011235955057
-query_expansion,2017,84,424,query_expansion query_reformulation relevance_feedback,7546,0.1347733898754307,scored,1058,0.09829867674858223
-recommender_systems,2017,522,8586,recommender recommenders recommendation recommendations collaborative_filtering,4558,0.4890302764370338,scored,640,0.346875
-learning_to_rank,2017,34,549,learning_to_rank lambdamart,8420,0.2155581947743468,scored,1172,0.16296928327645052
-dense_retrieval,2017,0,824,,9585,0.33792383933229003,target not in vocabulary,1293,0.22583139984532097
-conversational_search,2017,1,369,,9535,0.2087047718930257,target not in vocabulary,1287,0.12742812742812742
-retrieval_augmented_generation,2017,1,2135,,9558,0.5198786356978448,target not in vocabulary,1290,0.34806201550387594
-query_expansion,2018,101,410,query_expansion query_reformulation relevance_feedback,9061,0.10374130890630173,scored,1515,0.07986798679867987
-recommender_systems,2018,749,8363,recommender recommenders recommendation recommendations collaborative_filtering,5276,0.4203942380591357,scored,876,0.3093607305936073
-learning_to_rank,2018,53,533,learning_to_rank lambdamart listwise,9749,0.1623756282695661,scored,1579,0.11779607346421786
-dense_retrieval,2018,3,824,,11235,0.28918558077436585,target not in vocabulary,1796,0.19988864142538976
-conversational_search,2018,6,366,,11078,0.1656436179815851,target not in vocabulary,1777,0.10410804727068092
-retrieval_augmented_generation,2018,1,2135,,11370,0.4708883025505717,target not in vocabulary,1813,0.32653061224489793
-query_expansion,2019,123,387,query_expansion query_reformulation relevance_feedback,11062,0.07439884288555415,scored,2168,0.05350553505535055
-recommender_systems,2019,1092,8023,recommender recommenders recommendation recommendations collaborative_filtering,6230,0.33242375601926166,scored,1186,0.25463743676222594
-learning_to_rank,2019,84,496,learning_to_rank lambdamart listwise,11492,0.10764009745910198,scored,2198,0.07825295723384895
-dense_retrieval,2019,3,824,,13604,0.24786827403704792,target not in vocabulary,2562,0.1717408274785324
-conversational_search,2019,11,363,,13260,0.12956259426847663,target not in vocabulary,2517,0.08144616607071911
-retrieval_augmented_generation,2019,2,2135,,13694,0.41478019570614866,target not in vocabulary,2573,0.28449280994947534
-query_expansion,2020,150,365,query_expansion query_reformulation relevance_feedback,13622,0.05234180002936426,scored,3023,0.03638769434336751
-recommender_systems,2020,1596,7545,recommender recommenders recommendation recommendations collaborative_filtering,7490,0.24205607476635513,scored,1593,0.19083490269930947
-learning_to_rank,2020,132,459,learning_to_rank lambdamart listwise,13774,0.06693770872658632,scored,3000,0.045
-dense_retrieval,2020,11,823,dual_encoder,16302,0.19874861980125139,scored,3520,0.14005681818181817
-conversational_search,2020,24,353,,15827,0.08940418272572187,target not in vocabulary,3450,0.0527536231884058
-retrieval_augmented_generation,2020,2,2135,,16702,0.35989701832115917,target not in vocabulary,3593,0.24325076537712217
-query_expansion,2021,189,334,query_expansion query_reformulation query_rewriting relevance_feedback,16694,0.03318557565592428,scored,4068,0.02384464110127827
-recommender_systems,2021,2233,6945,recommender recommenders recommendation recommendations collaborative_filtering,9046,0.16548750829095732,scored,2039,0.1383030897498774
-learning_to_rank,2021,194,402,learning_to_rank lambdamart listwise,16529,0.03551334018996914,scored,3971,0.02618987660538907
-dense_retrieval,2021,30,814,dual_encoder,19323,0.14738912177198157,scored,4578,0.1037570991699432
-conversational_search,2021,55,320,conversational_search clarifying_questions,18770,0.05359616409163559,scored,4500,0.029777777777777778
-retrieval_augmented_generation,2021,3,2135,,20255,0.3086645272772155,target not in vocabulary,4783,0.2176458289776291
-query_expansion,2022,216,309,query_expansion query_reformulation query_rewriting relevance_feedback,20326,0.023615074289087868,scored,5265,0.016144349477682812
-recommender_systems,2022,3044,6200,recommender recommenders recommendation recommendations collaborative_filtering,10815,0.10577901063337956,scored,2537,0.10051241623965314
-learning_to_rank,2022,249,350,learning_to_rank lambdamart listwise,19889,0.02192166524209362,scored,5087,0.017102417928051897
-dense_retrieval,2022,102,756,dense_retrieval dense_retriever dense_retrievers dual_encoder bi_encoder bi_encoders,21910,0.08877225011410315,scored,5565,0.06091644204851752
-conversational_search,2022,104,283,conversational_search clarifying_questions,21815,0.026449690579876232,scored,5613,0.016034206306787813
-retrieval_augmented_generation,2022,18,2131,rag,23681,0.2530720831045986,scored,6011,0.18432873066045583
-query_expansion,2023,244,288,query_expansion query_reformulation query_rewriting relevance_feedback,24113,0.01671297640277029,scored,6471,0.011899242775459744
-recommender_systems,2023,3968,5351,recommender recommenders recommendation recommendations collaborative_filtering,12815,0.06648458837300039,scored,3038,0.07439104674127715
-learning_to_rank,2023,299,303,learning_to_rank ranknet lambdamart listwise,23487,0.014731553625409802,scored,6230,0.012520064205457464
-dense_retrieval,2023,232,671,dense_retrieval dense_retriever dense_retrievers dense_passage_retrieval dual_encoder dual_encoders bi_encoder bi_encoders,24373,0.047347474664587864,scored,6425,0.03455252918287938
-conversational_search,2023,152,244,conversational_search clarifying_questions,25250,0.013742574257425743,scored,6777,0.009591264571344252
-retrieval_augmented_generation,2023,53,2120,retrieval_augmented rag,26963,0.2013129102844639,scored,7154,0.15236231478892928
+target,T,pre_T_target_docs_ir,pre_T_target_docs,post_T_target_docs,target_tokens,n_candidates_all,base_rate_all,status,n_candidates_phrases,base_rate_phrases
+query_expansion,2016,65,71,438,query_expansion relevance_feedback,6330,0.16571879936808848,scored,717,0.12133891213389121
+recommender_systems,2016,359,373,8729,recommender recommenders recommendation recommendations collaborative_filtering,4026,0.5571286636860407,scored,451,0.3968957871396896
+learning_to_rank,2016,17,18,563,learning_to_rank lambdamart,7405,0.2734638757596219,fewer than 20 pre-T cs.IR abstracts,821,0.1851400730816078
+dense_retrieval,2016,0,0,824,,8134,0.37533808704204574,fewer than 20 pre-T cs.IR abstracts,890,0.23820224719101124
+conversational_search,2016,0,0,370,,8134,0.2421932628473076,fewer than 20 pre-T cs.IR abstracts,890,0.14606741573033707
+retrieval_augmented_generation,2016,0,0,2136,,8134,0.5671256454388984,fewer than 20 pre-T cs.IR abstracts,890,0.37191011235955057
+query_expansion,2017,78,84,424,query_expansion query_reformulation relevance_feedback,7546,0.1347733898754307,scored,1058,0.09829867674858223
+recommender_systems,2017,495,522,8586,recommender recommenders recommendation recommendations collaborative_filtering,4558,0.4890302764370338,scored,640,0.346875
+learning_to_rank,2017,31,34,549,learning_to_rank lambdamart,8420,0.2155581947743468,scored,1172,0.16296928327645052
+dense_retrieval,2017,0,0,824,,9585,0.33792383933229003,fewer than 20 pre-T cs.IR abstracts,1293,0.22583139984532097
+conversational_search,2017,1,1,369,,9535,0.2087047718930257,fewer than 20 pre-T cs.IR abstracts,1287,0.12742812742812742
+retrieval_augmented_generation,2017,1,1,2135,,9558,0.5198786356978448,fewer than 20 pre-T cs.IR abstracts,1290,0.34806201550387594
+query_expansion,2018,92,101,410,query_expansion query_reformulation relevance_feedback,9061,0.10374130890630173,scored,1515,0.07986798679867987
+recommender_systems,2018,703,749,8363,recommender recommenders recommendation recommendations collaborative_filtering,5276,0.4203942380591357,scored,876,0.3093607305936073
+learning_to_rank,2018,47,53,533,learning_to_rank lambdamart listwise,9749,0.1623756282695661,scored,1579,0.11779607346421786
+dense_retrieval,2018,0,3,824,,11235,0.28918558077436585,fewer than 20 pre-T cs.IR abstracts,1796,0.19988864142538976
+conversational_search,2018,4,6,366,,11078,0.1656436179815851,fewer than 20 pre-T cs.IR abstracts,1777,0.10410804727068092
+retrieval_augmented_generation,2018,1,1,2135,,11370,0.4708883025505717,fewer than 20 pre-T cs.IR abstracts,1813,0.32653061224489793
+query_expansion,2019,112,123,387,query_expansion query_reformulation relevance_feedback,11062,0.07439884288555415,scored,2168,0.05350553505535055
+recommender_systems,2019,1014,1092,8023,recommender recommenders recommendation recommendations collaborative_filtering,6230,0.33242375601926166,scored,1186,0.25463743676222594
+learning_to_rank,2019,74,84,496,learning_to_rank lambdamart listwise,11492,0.10764009745910198,scored,2198,0.07825295723384895
+dense_retrieval,2019,0,3,824,,13604,0.24786827403704792,fewer than 20 pre-T cs.IR abstracts,2562,0.1717408274785324
+conversational_search,2019,6,11,363,,13260,0.12956259426847663,fewer than 20 pre-T cs.IR abstracts,2517,0.08144616607071911
+retrieval_augmented_generation,2019,1,2,2135,,13694,0.41478019570614866,fewer than 20 pre-T cs.IR abstracts,2573,0.28449280994947534
+query_expansion,2020,136,150,365,query_expansion query_reformulation relevance_feedback,13622,0.05234180002936426,scored,3023,0.03638769434336751
+recommender_systems,2020,1471,1596,7545,recommender recommenders recommendation recommendations collaborative_filtering,7490,0.24205607476635513,scored,1593,0.19083490269930947
+learning_to_rank,2020,114,132,459,learning_to_rank lambdamart listwise,13774,0.06693770872658632,scored,3000,0.045
+dense_retrieval,2020,1,11,823,dual_encoder,16302,0.19874861980125139,fewer than 20 pre-T cs.IR abstracts,3520,0.14005681818181817
+conversational_search,2020,17,24,353,,15827,0.08940418272572187,fewer than 20 pre-T cs.IR abstracts,3450,0.0527536231884058
+retrieval_augmented_generation,2020,1,2,2135,,16702,0.35989701832115917,fewer than 20 pre-T cs.IR abstracts,3593,0.24325076537712217
+query_expansion,2021,167,189,334,query_expansion query_reformulation query_rewriting relevance_feedback,16694,0.03318557565592428,scored,4068,0.02384464110127827
+recommender_systems,2021,2034,2233,6945,recommender recommenders recommendation recommendations collaborative_filtering,9046,0.16548750829095732,scored,2039,0.1383030897498774
+learning_to_rank,2021,169,194,402,learning_to_rank lambdamart listwise,16529,0.03551334018996914,scored,3971,0.02618987660538907
+dense_retrieval,2021,7,30,814,dual_encoder,19323,0.14738912177198157,fewer than 20 pre-T cs.IR abstracts,4578,0.1037570991699432
+conversational_search,2021,44,55,320,conversational_search clarifying_questions,18770,0.05359616409163559,scored,4500,0.029777777777777778
+retrieval_augmented_generation,2021,1,3,2135,,20255,0.3086645272772155,fewer than 20 pre-T cs.IR abstracts,4783,0.2176458289776291
+query_expansion,2022,191,216,309,query_expansion query_reformulation query_rewriting relevance_feedback,20326,0.023615074289087868,scored,5265,0.016144349477682812
+recommender_systems,2022,2743,3044,6200,recommender recommenders recommendation recommendations collaborative_filtering,10815,0.10577901063337956,scored,2537,0.10051241623965314
+learning_to_rank,2022,220,249,350,learning_to_rank lambdamart listwise,19889,0.02192166524209362,scored,5087,0.017102417928051897
+dense_retrieval,2022,54,102,756,dense_retrieval dense_retriever dense_retrievers dual_encoder bi_encoder bi_encoders,21910,0.08877225011410315,scored,5565,0.06091644204851752
+conversational_search,2022,82,104,283,conversational_search clarifying_questions,21815,0.026449690579876232,scored,5613,0.016034206306787813
+retrieval_augmented_generation,2022,5,18,2131,rag,23681,0.2530720831045986,fewer than 20 pre-T cs.IR abstracts,6011,0.18432873066045583
+query_expansion,2023,212,244,288,query_expansion query_reformulation query_rewriting relevance_feedback,24113,0.01671297640277029,scored,6471,0.011899242775459744
+recommender_systems,2023,3565,3968,5351,recommender recommenders recommendation recommendations collaborative_filtering,12815,0.06648458837300039,scored,3038,0.07439104674127715
+learning_to_rank,2023,267,299,303,learning_to_rank ranknet lambdamart listwise,23487,0.014731553625409802,scored,6230,0.012520064205457464
+dense_retrieval,2023,128,232,671,dense_retrieval dense_retriever dense_retrievers dense_passage_retrieval dual_encoder dual_encoders bi_encoder bi_encoders,24373,0.047347474664587864,scored,6425,0.03455252918287938
+conversational_search,2023,119,152,244,conversational_search clarifying_questions,25250,0.013742574257425743,scored,6777,0.009591264571344252
+retrieval_augmented_generation,2023,12,53,2120,retrieval_augmented rag,26963,0.2013129102844639,fewer than 20 pre-T cs.IR abstracts,7154,0.15236231478892928

@@ -2,6 +2,9 @@
 the per-cutoff artefacts used by training, the backtest and the demo.
 
 Usage: ir2/.venv/bin/python ir2/scripts/phase2_preprocess.py [--sample 3000] [--cutoffs 2016 2020] [--jobs 4]
+                                                             [--skip-docs] [--no-version-filter]
+--no-version-filter: comparison run, pre-T text = first version before T only (revised abstracts kept);
+                     artefacts go to ir2/models/all_versions/T{T}/, the report to phase2_cutoffs_all_versions.md
 
 Writes
   ir2/data/docs.parquet                 id, year, is_ir, is_cl, ir_primary, title, abstract, text
@@ -57,11 +60,14 @@ def doc_sents(text):
 
 
 def process_cutoff(args):
-    T, out_root = args
+    T, out_root, version_filter = args
     t0 = time.time()
     docs = pd.read_parquet(L.DATA / "docs.parquet", columns=["year", "last_version_year", "is_ir", "text"])
     # pre-T training text: first version AND latest version (whose abstract the snapshot holds) before T
-    train_rows = np.flatnonzero((docs["year"].values < T) & (docs["last_version_year"].values < T))
+    first_before = docs["year"].values < T
+    filtered = first_before & (docs["last_version_year"].values < T)
+    train_rows = np.flatnonzero(filtered if version_filter else first_before)
+    n_removed = int(first_before.sum() - filtered.sum())          # docs the version filter removes (or would)
     post_rows = np.flatnonzero((docs["year"].values >= T) & docs["is_ir"].values)
     texts = docs["text"].values
     train_sents = [s for r in train_rows for s in doc_sents(texts[r])]
@@ -99,7 +105,10 @@ def process_cutoff(args):
     np.savez(out / "rows.npz", train=train_rows, post=post_rows)
     n_phr = sum(len(p.phrasegrams) for p in layers)
     n_multi = sum("_" in t for t in vocab)
-    msg = (f"T={T}: {len(train_rows):,} train docs ({sum(len(s) for s in train_sents):,} tokens), "
+    filt = (f"version filter removed {n_removed:,} of {int(first_before.sum()):,} pre-T docs "
+            f"({n_removed / first_before.sum():.1%})" if version_filter else
+            f"no version filter: {n_removed:,} docs revised in or after T included")
+    msg = (f"T={T}: {len(train_rows):,} train docs ({sum(len(s) for s in train_sents):,} tokens; {filt}), "
            f"{len(post_rows):,} post cs.IR docs, {n_phr:,} phrasegrams, vocab {len(vocab):,} "
            f"({n_multi:,} phrases), {time.time() - t0:.0f}s")
     print(msg, flush=True)
@@ -112,15 +121,19 @@ def main():
     ap.add_argument("--cutoffs", type=int, nargs="+", default=L.CUTOFFS)
     ap.add_argument("--jobs", type=int, default=4)
     ap.add_argument("--skip-docs", action="store_true")
+    ap.add_argument("--no-version-filter", action="store_true")
     args = ap.parse_args()
     if not args.skip_docs:
         docs = build_docs(args.sample)
         docs.to_parquet(L.DATA / "docs.parquet", index=False)
-    out_root = L.MODELS / "sample" if args.sample else L.MODELS
+    variant = "all_versions" if args.no_version_filter else "main"
+    out_root = L.MODELS / "sample" if args.sample else L.VARIANTS[variant]
     with Pool(args.jobs) as pool:
-        msgs = pool.map(process_cutoff, [(T, out_root) for T in args.cutoffs])
+        msgs = pool.map(process_cutoff, [(T, out_root, not args.no_version_filter) for T in args.cutoffs])
     if not args.sample:
-        (L.RESULTS / "phase2_cutoffs.md").write_text("# Phase 2: per-cutoff preprocessing\n\n" +
+        title = "" if variant == "main" else " (comparison run without the version filter)"
+        (L.RESULTS / f"phase2_cutoffs{L.variant_suffix(variant)}.md").write_text(
+            f"# Phase 2: per-cutoff preprocessing{title}\n\n" +
                                                      "\n".join(f"- {m}" for m in msgs) + "\n")
 
 

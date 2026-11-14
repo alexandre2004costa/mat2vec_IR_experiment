@@ -1,7 +1,8 @@
 """Phase 3a: train word2vec on pre-T text, 3 seeds per cutoff, with the paper's hyperparameters.
 
 Usage: ir2/.venv/bin/python ir2/scripts/phase3_train.py [--cutoffs 2016 ...] [--seeds 0 1 2] [--epochs 30]
-Writes ir2/models/T{T}/w2v_s{seed}.kv (input vectors) and w2v_s{seed}.syn1neg.npy (output vectors, same row order).
+                                                        [--variant main|all_versions]
+Writes ir2/models/[all_versions/]T{T}/w2v_s{seed}.kv (input vectors) and w2v_s{seed}.syn1neg.npy (output vectors, same row order).
 """
 import argparse
 import logging
@@ -25,10 +26,11 @@ def main():
     ap.add_argument("--seeds", type=int, nargs="+", default=L.SEEDS)
     ap.add_argument("--epochs", type=int, default=30)
     ap.add_argument("--force", action="store_true")
+    ap.add_argument("--variant", choices=list(L.VARIANTS), default="main")
     args = ap.parse_args()
     logging.basicConfig(format="%(asctime)s %(message)s", level=logging.WARNING)
     for T in args.cutoffs:
-        d = L.cutoff_dir(T)
+        d = L.cutoff_dir(T, args.variant)
         for seed in args.seeds:
             out = d / f"w2v_s{seed}.kv"
             if out.exists() and not args.force:
@@ -38,7 +40,7 @@ def main():
             m = Word2Vec(LineSentence(str(d / "train.txt")), epochs=args.epochs, seed=seed, **PARAMS)
             m.wv.save(str(out))
             np.save(d / f"w2v_s{seed}.syn1neg.npy", m.syn1neg)
-            print(f"T={T} seed={seed}: vocab {len(m.wv):,}, {time.time() - t0:.0f}s", flush=True)
+            print(f"[{args.variant}] T={T} seed={seed}: vocab {len(m.wv):,}, {time.time() - t0:.0f}s", flush=True)
 
 
 if __name__ == "__main__":

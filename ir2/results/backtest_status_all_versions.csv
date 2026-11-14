@@ -1,0 +1,49 @@
+target,T,pre_T_target_docs_ir,pre_T_target_docs,post_T_target_docs,target_tokens,n_candidates_all,base_rate_all,status,n_candidates_phrases,base_rate_phrases
+query_expansion,2016,65,71,438,query_expansion relevance_feedback,6639,0.16056635035396896,scored,789,0.12040557667934093
+recommender_systems,2016,377,393,8729,recommender recommenders recommendation recommendations collaborative_filtering,4189,0.5469085700644545,scored,490,0.39387755102040817
+learning_to_rank,2016,19,20,563,learning_to_rank lambdamart,7642,0.2605338916514002,fewer than 20 pre-T cs.IR abstracts,882,0.17800453514739228
+dense_retrieval,2016,0,0,824,,8452,0.3677236157122575,fewer than 20 pre-T cs.IR abstracts,965,0.23834196891191708
+conversational_search,2016,0,0,370,,8452,0.23473734027449125,fewer than 20 pre-T cs.IR abstracts,965,0.1461139896373057
+retrieval_augmented_generation,2016,0,0,2136,,8452,0.5565546616185518,fewer than 20 pre-T cs.IR abstracts,965,0.36580310880829014
+query_expansion,2017,79,85,424,query_expansion query_reformulation relevance_feedback,7844,0.12978072412034677,scored,1122,0.09536541889483066
+recommender_systems,2017,520,551,8586,recommender recommenders recommendation recommendations collaborative_filtering,4728,0.47779187817258884,scored,676,0.33875739644970415
+learning_to_rank,2017,33,36,549,learning_to_rank lambdamart,8694,0.20749942489072923,scored,1234,0.15721231766612642
+dense_retrieval,2017,0,0,824,,9911,0.33074361820199777,fewer than 20 pre-T cs.IR abstracts,1370,0.22335766423357664
+conversational_search,2017,1,1,369,,9860,0.20324543610547668,fewer than 20 pre-T cs.IR abstracts,1364,0.12390029325513197
+retrieval_augmented_generation,2017,1,1,2135,,9884,0.5106232294617564,fewer than 20 pre-T cs.IR abstracts,1367,0.34820775420629113
+query_expansion,2018,93,102,410,query_expansion query_reformulation relevance_feedback,9443,0.10028592608281267,scored,1635,0.07767584097859327
+recommender_systems,2018,743,791,8363,recommender recommenders recommendation recommendations collaborative_filtering,5434,0.4054103790945896,scored,923,0.30119176598049835
+learning_to_rank,2018,49,56,533,learning_to_rank lambdamart listwise,10076,0.15442635966653434,scored,1690,0.11420118343195267
+dense_retrieval,2018,0,3,824,,11642,0.28182442879230374,fewer than 20 pre-T cs.IR abstracts,1927,0.19564089257913855
+conversational_search,2018,4,6,366,,11485,0.1610796691336526,fewer than 20 pre-T cs.IR abstracts,1907,0.10225485055060304
+retrieval_augmented_generation,2018,1,1,2135,,11777,0.46115309501570856,fewer than 20 pre-T cs.IR abstracts,1944,0.31790123456790126
+query_expansion,2019,116,128,387,query_expansion query_reformulation relevance_feedback,11470,0.07027027027027027,scored,2304,0.04991319444444445
+recommender_systems,2019,1083,1170,8023,recommender recommenders recommendation recommendations collaborative_filtering,6410,0.31482059282371294,scored,1245,0.2433734939759036
+learning_to_rank,2019,86,96,496,learning_to_rank lambdamart listwise,11782,0.0971821422508912,scored,2313,0.07090358841331604
+dense_retrieval,2019,0,4,824,,14056,0.23939954467842914,fewer than 20 pre-T cs.IR abstracts,2721,0.16648291069459759
+conversational_search,2019,7,12,363,,13699,0.12343966712898752,fewer than 20 pre-T cs.IR abstracts,2672,0.07559880239520958
+retrieval_augmented_generation,2019,1,2,2135,,14181,0.40476694168253297,fewer than 20 pre-T cs.IR abstracts,2739,0.2763782402336619
+query_expansion,2020,138,153,365,query_expansion query_reformulation relevance_feedback,14195,0.049383585769637195,scored,3231,0.0337356855462705
+recommender_systems,2020,1561,1694,7545,recommender recommenders recommendation recommendations collaborative_filtering,7790,0.2300385109114249,scored,1700,0.19058823529411764
+learning_to_rank,2020,123,142,459,learning_to_rank lambdamart listwise,14260,0.06143057503506311,scored,3181,0.03803835271927067
+dense_retrieval,2020,1,14,823,dual_encoder,16812,0.18831786818938853,fewer than 20 pre-T cs.IR abstracts,3706,0.13167835941716136
+conversational_search,2020,17,24,353,,16457,0.08640700006076442,fewer than 20 pre-T cs.IR abstracts,3669,0.05124011992368493
+retrieval_augmented_generation,2020,1,2,2135,,17332,0.3504500346180475,fewer than 20 pre-T cs.IR abstracts,3815,0.24141546526867627
+query_expansion,2021,169,193,334,query_expansion query_reformulation query_rewriting relevance_feedback,17478,0.030953198306442383,scored,4300,0.022558139534883722
+recommender_systems,2021,2161,2383,6945,recommender recommenders recommendation recommendations collaborative_filtering,9426,0.1522384892849565,scored,2138,0.12909260991580918
+learning_to_rank,2021,180,206,402,learning_to_rank lambdamart listwise,17276,0.0329358647835147,scored,4211,0.02469722156257421
+dense_retrieval,2021,10,39,814,dual_encoder,19971,0.1359471233288268,fewer than 20 pre-T cs.IR abstracts,4792,0.09557595993322204
+conversational_search,2021,50,63,320,conversational_search clarifying_questions,19420,0.047064881565396496,scored,4710,0.025902335456475585
+retrieval_augmented_generation,2021,1,4,2135,rag,21050,0.2970546318289786,fewer than 20 pre-T cs.IR abstracts,5035,0.21132075471698114
+query_expansion,2022,194,221,309,query_expansion query_reformulation query_rewriting relevance_feedback,21114,0.02159704461494743,scored,5536,0.01463150289017341
+recommender_systems,2022,2906,3221,6200,recommender recommenders recommendation recommendations collaborative_filtering,11293,0.09997343487115913,scored,2683,0.09653373089824822
+learning_to_rank,2022,232,263,350,learning_to_rank lambdamart listwise,20605,0.020237806357680174,scored,5345,0.015902712815715623
+dense_retrieval,2022,68,130,756,dense_retrieval dense_retriever dense_retrievers dual_encoder bi_encoder bi_encoders,22396,0.07925522414716914,scored,5768,0.05513176144244106
+conversational_search,2022,87,112,283,conversational_search clarifying_questions,22539,0.02378100181906917,scored,5883,0.014618391976882543
+retrieval_augmented_generation,2022,5,20,2131,rag,24504,0.24404178909565785,fewer than 20 pre-T cs.IR abstracts,6306,0.1774500475737393
+query_expansion,2023,215,250,288,query_expansion query_reformulation query_rewriting relevance_feedback,25001,0.015759369625214993,scored,6742,0.010827647582319787
+recommender_systems,2023,3755,4187,5351,recommender recommenders recommendation recommendations collaborative_filtering,13257,0.06042090970807875,scored,3129,0.06871204857782039
+learning_to_rank,2023,279,312,303,learning_to_rank ranknet lambdamart listwise,24312,0.012997696610727213,scored,6479,0.010804136440808767
+dense_retrieval,2023,153,274,671,dense_retrieval dense_retriever dense_retrievers dense_passage_retrieval dual_encoder dual_encoders bi_encoder bi_encoders,24907,0.0413939856265307,scored,6592,0.03033980582524272
+conversational_search,2023,126,161,244,conversational_search clarifying_questions,26095,0.012607779268059015,scored,7042,0.008378301618858278
+retrieval_augmented_generation,2023,16,70,2120,retrieval_augmented rag,27511,0.18770673548762312,fewer than 20 pre-T cs.IR abstracts,7368,0.1450868621064061

@@ -1,7 +1,12 @@
 """Phase 3c: the historical backtest. For each cutoff T and target, rank candidate terms with every method and
 check which candidates co-occur with the target in >= 3 cs.IR abstracts from T onwards.
 
+A (target, T) pair is scored only if the concept already exists before T (professor's point 1): an indicator
+occurs in >= MIN_TARGET_DOCS pre-T cs.IR abstracts, and an indicator token is in the pre-T word2vec vocabulary.
+
 Usage: ir2/.venv/bin/python ir2/scripts/phase3_backtest.py [--cutoffs ...] [--targets ...] [--no-specter]
+                                                           [--variant main|all_versions]
+Output names get "_all_versions" for the comparison run and "_partial" when --cutoffs/--targets are restricted.
 Writes ir2/results/backtest.csv           one row per (setting, target, T, method, seed): P@10/20/50, base rate
        ir2/results/backtest_curves.csv    cumulative fraction of the top 50 found within n years
        ir2/results/backtest_top.csv       top-50 lists (seed 0) with found / first year
@@ -20,6 +25,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import ir2lib as L  # noqa: E402
 
 FOUND_MIN = 3          # co-occurrences in distinct cs.IR abstracts from T onwards
+MIN_TARGET_DOCS = 20   # the concept "exists" before T: an indicator in >= 20 pre-T cs.IR abstracts
 KS = (10, 20, 50)
 N_RANDOM = 1000
 MIN_CANDIDATES = 50
@@ -30,8 +36,8 @@ SETTINGS = {"all": lambda terms: np.ones(len(terms), bool),
 class Cutoff:
     """Everything about one cutoff T that does not depend on the target."""
 
-    def __init__(self, T, use_specter):
-        d = L.cutoff_dir(T)
+    def __init__(self, T, use_specter, variant="main"):
+        d = L.cutoff_dir(T, variant)
         self.T = T
         self.vocab = pd.read_parquet(d / "vocab.parquet")
         self.terms = self.vocab["term"].values
@@ -41,6 +47,7 @@ class Cutoff:
         self.train_rows, self.post_rows = rows["train"], rows["post"]
         docs = L.load_docs()
         self.train_text = docs["text"].values[self.train_rows]
+        self.train_is_ir = docs["is_ir"].values[self.train_rows]
         self.post_text = docs["text"].values[self.post_rows]
         self.post_year = docs["year"].values[self.post_rows]
         self.kvs = {}
@@ -96,13 +103,13 @@ def main():
     ap.add_argument("--cutoffs", type=int, nargs="+", default=L.CUTOFFS)
     ap.add_argument("--targets", nargs="+", default=list(L.TARGETS))
     ap.add_argument("--no-specter", action="store_true")
+    ap.add_argument("--variant", choices=list(L.VARIANTS), default="main")
     args = ap.parse_args()
     use_specter = not args.no_specter and (L.DATA / "specter2.npy").exists()
-    rng = np.random.default_rng(0)
     rows, curves, tops, status = [], [], [], []
 
     for T in args.cutoffs:
-        cut = Cutoff(T, use_specter)
+        cut = Cutoff(T, use_specter, args.variant)
         print(f"T={T}: {len(cut.terms):,} terms, {len(cut.train_rows):,} train docs, {len(cut.post_rows):,} post docs",
               flush=True)
         for name in args.targets:
@@ -115,22 +122,23 @@ def main():
             cand_all = cut.vocab["candidate"].values & ~cooc_pre
             first = found_years(cut, ind_po)
             _, toks = L.target_vector(cut.kvs[0][0], ind)
-            st = {"target": name, "T": T, "pre_T_target_docs": int(ind_tr.sum()),
+            n_ir = int((ind_tr & cut.train_is_ir).sum())
+            exists = n_ir >= MIN_TARGET_DOCS and bool(toks)
+            st = {"target": name, "T": T, "pre_T_target_docs_ir": n_ir, "pre_T_target_docs": int(ind_tr.sum()),
                   "post_T_target_docs": int(ind_po.sum()), "target_tokens": " ".join(toks),
                   "n_candidates_all": int(cand_all.sum())}
 
-            # scores for all terms; candidate masks applied below
+            # scores for all terms (only for pairs whose concept exists before T); candidate masks applied below
             scores = {}
-            if toks:
+            if exists:
                 for s, (kv, W_in, W_out) in cut.kvs.items():
                     tv, _ = L.target_vector(kv, ind)
                     scores[("w2v_in", s)] = W_in @ tv
                     scores[("w2v_out", s)] = W_out @ tv
-            if cut.E_term is not None and ind_tr.any():
-                tv = cut.E_train[ind_tr].mean(axis=0)
-                scores[("specter2", 0)] = cut.E_term @ (tv / np.linalg.norm(tv))
-            scores[("frequency", 0)] = cut.vocab["count"].values.astype(float)
-            if ind_tr.any():
+                if cut.E_term is not None:
+                    tv = cut.E_train[ind_tr].mean(axis=0)
+                    scores[("specter2", 0)] = cut.E_term @ (tv / np.linalg.norm(tv))
+                scores[("frequency", 0)] = cut.vocab["count"].values.astype(float)
                 g = cut.Xr.T @ ind_tr.astype(np.float32)                      # target context counts
                 num = cut.Xr.T @ (cut.Xr @ g)
                 scores[("cooc2", 0)] = num / np.maximum(cut.ctx_norm * np.linalg.norm(g), 1e-9)
@@ -141,10 +149,11 @@ def main():
                 base = float((fc > 0).mean()) if len(cand) else float("nan")
                 st[f"n_candidates_{setting}"], st[f"base_rate_{setting}"] = len(cand), base
                 if setting == "all":
-                    st["status"] = ("target not in vocabulary" if not toks else
-                                    f"fewer than {MIN_CANDIDATES} candidates" if len(cand) < MIN_CANDIDATES
+                    st["status"] = (f"fewer than {MIN_TARGET_DOCS} pre-T cs.IR abstracts" if n_ir < MIN_TARGET_DOCS
+                                    else "target not in vocabulary" if not toks
+                                    else f"fewer than {MIN_CANDIDATES} candidates" if len(cand) < MIN_CANDIDATES
                                     else "scored")
-                if len(cand) < MIN_CANDIDATES:
+                if not exists or len(cand) < MIN_CANDIDATES:
                     continue
                 common = {"setting": setting, "target": name, "T": T, "n_candidates": len(cand), "base_rate": base,
                           "w2v_target_in_vocab": bool(toks)}
@@ -165,6 +174,8 @@ def main():
                                   "found": bool(fc[j] > 0), "first_year": int(fc[j]) or None}
                                  for r, j in enumerate(order[:50])]
                 # random ranking: mean over 1000 draws; its curve is the expectation (= candidate base rate by year)
+                # one fixed seed per (target, T, setting): the draws do not depend on which other pairs are run
+                rng = np.random.default_rng([T, list(L.TARGETS).index(name), list(SETTINGS).index(setting)])
                 draws = [rank_metrics(rng.permutation(len(cand)), fc, T)[0] for _ in range(N_RANDOM)]
                 rows.append({**common, "method": "random", "seed": 0,
                              **{f"p{k}": float(np.mean([d[f"p{k}"] for d in draws])) for k in KS}})
@@ -174,7 +185,8 @@ def main():
             print(f"  {name:32} {st['status']:28} cand(all) {st['n_candidates_all']:6,} "
                   f"base {st.get('base_rate_all', float('nan')):.3f}  tokens: {st['target_tokens']}", flush=True)
 
-    sfx = "" if args.cutoffs == L.CUTOFFS and args.targets == list(L.TARGETS) else "_partial"
+    sfx = L.variant_suffix(args.variant) + \
+        ("" if args.cutoffs == L.CUTOFFS and args.targets == list(L.TARGETS) else "_partial")
     pd.DataFrame(rows).to_csv(L.RESULTS / f"backtest{sfx}.csv", index=False)
     pd.DataFrame(curves).to_csv(L.RESULTS / f"backtest_curves{sfx}.csv", index=False)
     pd.DataFrame(tops).to_csv(L.RESULTS / f"backtest_top{sfx}.csv", index=False)
