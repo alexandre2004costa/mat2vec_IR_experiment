@@ -1,0 +1,56 @@
+T=2016: 8,610 terms, 6,042 train docs, 25,267 post docs
+  query_expansion                  scored                       cand(all)  6,639 base 0.161  tokens: query_expansion relevance_feedback
+  recommender_systems              scored                       cand(all)  4,189 base 0.547  tokens: recommender recommenders recommendation recommendations collaborative_filtering
+  learning_to_rank                 fewer than 20 pre-T cs.IR abstracts cand(all)  7,642 base 0.261  tokens: learning_to_rank lambdamart
+  dense_retrieval                  fewer than 20 pre-T cs.IR abstracts cand(all)  8,452 base 0.368  tokens: 
+  conversational_search            fewer than 20 pre-T cs.IR abstracts cand(all)  8,452 base 0.235  tokens: 
+  retrieval_augmented_generation   fewer than 20 pre-T cs.IR abstracts cand(all)  8,452 base 0.557  tokens: 
+T=2017: 10,101 terms, 8,125 train docs, 24,692 post docs
+  query_expansion                  scored                       cand(all)  7,844 base 0.130  tokens: query_expansion query_reformulation relevance_feedback
+  recommender_systems              scored                       cand(all)  4,728 base 0.478  tokens: recommender recommenders recommendation recommendations collaborative_filtering
+  learning_to_rank                 scored                       cand(all)  8,694 base 0.207  tokens: learning_to_rank lambdamart
+  dense_retrieval                  fewer than 20 pre-T cs.IR abstracts cand(all)  9,911 base 0.331  tokens: 
+  conversational_search            fewer than 20 pre-T cs.IR abstracts cand(all)  9,860 base 0.203  tokens: 
+  retrieval_augmented_generation   fewer than 20 pre-T cs.IR abstracts cand(all)  9,884 base 0.511  tokens: 
+T=2018: 12,032 terms, 11,089 train docs, 23,898 post docs
+  query_expansion                  scored                       cand(all)  9,443 base 0.100  tokens: query_expansion query_reformulation relevance_feedback
+  recommender_systems              scored                       cand(all)  5,434 base 0.405  tokens: recommender recommenders recommendation recommendations collaborative_filtering
+  learning_to_rank                 scored                       cand(all) 10,076 base 0.154  tokens: learning_to_rank lambdamart listwise
+  dense_retrieval                  fewer than 20 pre-T cs.IR abstracts cand(all) 11,642 base 0.282  tokens: 
+  conversational_search            fewer than 20 pre-T cs.IR abstracts cand(all) 11,485 base 0.161  tokens: 
+  retrieval_augmented_generation   fewer than 20 pre-T cs.IR abstracts cand(all) 11,777 base 0.461  tokens: 
+T=2019: 14,538 terms, 15,655 train docs, 22,771 post docs
+  query_expansion                  scored                       cand(all) 11,470 base 0.070  tokens: query_expansion query_reformulation relevance_feedback
+  recommender_systems              scored                       cand(all)  6,410 base 0.315  tokens: recommender recommenders recommendation recommendations collaborative_filtering
+  learning_to_rank                 scored                       cand(all) 11,782 base 0.097  tokens: learning_to_rank lambdamart listwise
+  dense_retrieval                  fewer than 20 pre-T cs.IR abstracts cand(all) 14,056 base 0.239  tokens: 
+  conversational_search            fewer than 20 pre-T cs.IR abstracts cand(all) 13,699 base 0.123  tokens: 
+  retrieval_augmented_generation   fewer than 20 pre-T cs.IR abstracts cand(all) 14,181 base 0.405  tokens: 
+T=2020: 17,757 terms, 22,179 train docs, 21,140 post docs
+  query_expansion                  scored                       cand(all) 14,195 base 0.049  tokens: query_expansion query_reformulation relevance_feedback
+  recommender_systems              scored                       cand(all)  7,790 base 0.230  tokens: recommender recommenders recommendation recommendations collaborative_filtering
+  learning_to_rank                 scored                       cand(all) 14,260 base 0.061  tokens: learning_to_rank lambdamart listwise
+  dense_retrieval                  fewer than 20 pre-T cs.IR abstracts cand(all) 16,812 base 0.188  tokens: dual_encoder
+  conversational_search            fewer than 20 pre-T cs.IR abstracts cand(all) 16,457 base 0.086  tokens: 
+  retrieval_augmented_generation   fewer than 20 pre-T cs.IR abstracts cand(all) 17,332 base 0.350  tokens: 
+T=2021: 21,670 terms, 30,682 train docs, 19,142 post docs
+  query_expansion                  scored                       cand(all) 17,478 base 0.031  tokens: query_expansion query_reformulation query_rewriting relevance_feedback
+  recommender_systems              scored                       cand(all)  9,426 base 0.152  tokens: recommender recommenders recommendation recommendations collaborative_filtering
+  learning_to_rank                 scored                       cand(all) 17,276 base 0.033  tokens: learning_to_rank lambdamart listwise
+  dense_retrieval                  fewer than 20 pre-T cs.IR abstracts cand(all) 19,971 base 0.136  tokens: dual_encoder
+  conversational_search            scored                       cand(all) 19,420 base 0.047  tokens: conversational_search clarifying_questions
+  retrieval_augmented_generation   fewer than 20 pre-T cs.IR abstracts cand(all) 21,050 base 0.297  tokens: rag
+T=2022: 25,746 terms, 40,285 train docs, 17,112 post docs
+  query_expansion                  scored                       cand(all) 21,114 base 0.022  tokens: query_expansion query_reformulation query_rewriting relevance_feedback
+  recommender_systems              scored                       cand(all) 11,293 base 0.100  tokens: recommender recommenders recommendation recommendations collaborative_filtering
+  learning_to_rank                 scored                       cand(all) 20,605 base 0.020  tokens: learning_to_rank lambdamart listwise
+  dense_retrieval                  scored                       cand(all) 22,396 base 0.079  tokens: dense_retrieval dense_retriever dense_retrievers dual_encoder bi_encoder bi_encoders
+  conversational_search            scored                       cand(all) 22,539 base 0.024  tokens: conversational_search clarifying_questions
+  retrieval_augmented_generation   fewer than 20 pre-T cs.IR abstracts cand(all) 24,504 base 0.244  tokens: rag
+T=2023: 30,051 terms, 50,910 train docs, 14,987 post docs
+  query_expansion                  scored                       cand(all) 25,001 base 0.016  tokens: query_expansion query_reformulation query_rewriting relevance_feedback
+  recommender_systems              scored                       cand(all) 13,257 base 0.060  tokens: recommender recommenders recommendation recommendations collaborative_filtering
+  learning_to_rank                 scored                       cand(all) 24,312 base 0.013  tokens: learning_to_rank ranknet lambdamart listwise
+  dense_retrieval                  scored                       cand(all) 24,907 base 0.041  tokens: dense_retrieval dense_retriever dense_retrievers dense_passage_retrieval dual_encoder dual_encoders bi_encoder bi_encoders
+  conversational_search            scored                       cand(all) 26,095 base 0.013  tokens: conversational_search clarifying_questions
+  retrieval_augmented_generation   fewer than 20 pre-T cs.IR abstracts cand(all) 27,511 base 0.188  tokens: retrieval_augmented rag
