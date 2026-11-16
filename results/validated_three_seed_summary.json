@@ -1,0 +1,23 @@
+﻿[
+    {
+        "dataset":  "scifact",
+        "ndcg10_mean":  0.41979999999999995,
+        "ndcg10_sample_std":  0.0055108982933819422,
+        "recall100_mean":  0.80216666666666658,
+        "recall100_sample_std":  0.0056447615833915728
+    },
+    {
+        "dataset":  "nfcorpus",
+        "ndcg10_mean":  0.21956666666666669,
+        "ndcg10_sample_std":  0.0013868429375143146,
+        "recall100_mean":  0.20909999999999998,
+        "recall100_sample_std":  0.001452583904633395
+    },
+    {
+        "dataset":  "arguana",
+        "ndcg10_mean":  0.38626666666666659,
+        "ndcg10_sample_std":  0.0017616280348965083,
+        "recall100_mean":  0.91183333333333338,
+        "recall100_sample_std":  0.003251666239535253
+    }
+]
