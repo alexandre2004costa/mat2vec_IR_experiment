@@ -12,7 +12,7 @@ Every training abstract of every cutoff has first and latest version before T: *
 
 ## 3. "Found" is real
 
-### Hero pair: `learning_to_rank`, T = 2020, candidates `phrases` (word2vec top 20, seed 0)
+### Example pair: `learning_to_rank`, T = 2020, candidates `phrases` (word2vec top 20, seed 0)
 
 For each term: post-T cs.IR abstracts containing both the term and an indicator. ✓ requires ≥ 3; the recorded year must be the year of the 3rd.
 
@@ -51,4 +51,4 @@ Over 56 (pair, candidate set) rows, |random P@50 − base rate| is at most 0.004
 
 ## 5. Seeds differ
 
-word2vec P@50 is identical across the 3 seeds in 3/56 (pair, candidate set) rows; the mean std across seeds is 0.027. The seeds are applied, and the spread is small. Identical values in a few rows are expected: P@50 moves in steps of 0.02.
+word2vec P@50 is identical across the 3 seeds in 3/56 (pair, candidate set) rows; the mean std across seeds is 0.027. The seeds are applied, and the spread is small. Identical values in a few rows are expected: P@50 moves in steps of 0.02. **PASS** (not identical in every row).

@@ -108,7 +108,7 @@ def main():
     # 3a. hero pair, full listing
     ht, hT, hs = args.hero[0], int(args.hero[1]), args.hero[2]
     md += ["## 3. \"Found\" is real", "",
-           f"### Hero pair: `{ht}`, T = {hT}, candidates `{hs}` (word2vec top 20, seed 0)", "",
+           f"### Example pair: `{ht}`, T = {hT}, candidates `{hs}` (word2vec top 20, seed 0)", "",
            "For each term: post-T cs.IR abstracts containing both the term and an indicator. ✓ requires ≥ 3; "
            "the recorded year must be the year of the 3rd.", "",
            "| rank | term | recorded | recount | first 3 abstracts (arXiv id, year) | check |", "|:-:|---|:-:|:-:|---|:-:|"]
@@ -145,7 +145,8 @@ def main():
     md += ["## 5. Seeds differ", "",
            f"word2vec P@50 is identical across the 3 seeds in {same}/{len(w)} (pair, candidate set) rows; the "
            f"mean std across seeds is {w.std(axis=1).mean():.3f}. The seeds are applied, and the spread is small. "
-           f"Identical values in a few rows are expected: P@50 moves in steps of 0.02.", ""]
+           f"Identical values in a few rows are expected: P@50 moves in steps of 0.02. "
+           f"**{'PASS' if same < len(w) else 'FAIL'}** (not identical in every row).", ""]
 
     (L.RESULTS / "backtest_checks.md").write_text("\n".join(md))
     print("\n".join(md))

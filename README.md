@@ -14,4 +14,4 @@ python testbed.py score pairs/12-mat2vec/runs --method "mat2vec word2vec + SIF (
 
 ## Historical backtest and timeline
 
-The paper's own experiment, a historical backtest adapted to arXiv cs.IR (plus the thermoelectric backtest in the paper's domain and an embedding timeline of the field), is in [reproduction/](reproduction/README.md). [reproduce.ipynb](reproduce.ipynb) shows its saved results; decisions are logged in [reproduction/NOTES.md](reproduction/NOTES.md). Reading and test plans are in [docs/](docs/).
+The paper's own experiment, a historical backtest adapted to arXiv cs.IR (plus the thermoelectric backtest in the paper's domain and an embedding timeline of the field), is in [reproduction/](reproduction/README.md). [reproduce.ipynb](reproduce.ipynb) shows its saved results. Reading plan is in [docs/](docs/).

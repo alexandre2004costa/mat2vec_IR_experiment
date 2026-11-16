@@ -1,7 +1,7 @@
 """Phase 3c: the historical backtest. For each cutoff T and target, rank candidate terms with every method and
 check which candidates co-occur with the target in >= 3 cs.IR abstracts from T onwards.
 
-A (target, T) pair is scored only if the concept already exists before T (professor's point 1): an indicator
+A (target, T) pair is scored only if the concept already exists before T: an indicator
 occurs in >= MIN_TARGET_DOCS pre-T cs.IR abstracts, and an indicator token is in the pre-T word2vec vocabulary.
 
 Usage: python reproduction/scripts/phase3_backtest.py [--cutoffs ...] [--targets ...] [--no-specter]

@@ -56,7 +56,7 @@ def summary(r, setting):
 
 
 def main_table(r, setting):
-    """Professor's point 2: for every scored pair, P@10/20/50 of the paper's method next to random and frequency."""
+    """For every scored pair, P@10/20/50 of the paper's method next to random and frequency."""
     r = r[r.setting == setting]
     w = r[r.method == "w2v_out"]
     mu = w.groupby(["target", "T"])[["p10", "p20", "p50"]].mean()
@@ -90,7 +90,7 @@ def main_table(r, setting):
 
 
 def leakage(variants):
-    """Professor's point 3: does the result hold with and without the version filter? Compared on the pairs scored
+    """Leakage check: does the result hold with and without the version filter? Compared on the pairs scored
     in both runs."""
     r = {v: pd.read_csv(L.RESULTS / f"backtest{L.variant_suffix(v)}.csv") for v in variants}
     docs = L.load_docs()[["year", "last_version_year"]]
@@ -161,7 +161,7 @@ def fig3a(c, setting, path, variant="main"):
 
 def hero(t, target, T, setting, k=20):
     x = t[(t.setting == setting) & (t.target == target) & (t["T"] == T)]
-    out = [f"# Hero list: `{target}`, cutoff T = {T}, candidates `{setting}`", "",
+    out = [f"# Example list: `{target}`, cutoff T = {T}, candidates `{setting}`", "",
            f"Trained on cs.IR ∪ cs.CL abstracts before {T}. Candidates never appear in an abstract with a "
            f"`{target}` indicator before {T}. ✓ = appears with an indicator in ≥ 3 cs.IR abstracts from {T} on "
            f"(year the third one appeared).", "",

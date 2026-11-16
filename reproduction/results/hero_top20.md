@@ -1,4 +1,4 @@
-# Hero list: `learning_to_rank`, cutoff T = 2020, candidates `phrases`
+# Example list: `learning_to_rank`, cutoff T = 2020, candidates `phrases`
 
 Trained on cs.IR ∪ cs.CL abstracts before 2020. Candidates never appear in an abstract with a `learning_to_rank` indicator before 2020. ✓ = appears with an indicator in ≥ 3 cs.IR abstracts from 2020 on (year the third one appeared).
 
