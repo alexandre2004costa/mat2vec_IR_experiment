@@ -2,8 +2,7 @@
 
 A. SPECTER2: for each keyword-defined subtopic and year, the centroid of its cs.IR abstracts' cached SPECTER2
    vectors (only points with >= MIN_DOCS abstracts). One PCA fitted on all centroids together, so the axes are
-   shared across years. Robustness: refit without 2026 (partial year) and with >= 50 abstracts per point, compared
-   with the main layout by Procrustes disparity (0 = same shape).
+   shared across years.
 B. word2vec (optional part of the plan): nearest neighbours of a few concepts per cutoff (seed 0), and how far each
    concept's vector moves between consecutive cutoffs after orthogonal Procrustes alignment on the shared vocabulary
    (Hamilton et al. 2016), compared with the median word.
@@ -21,7 +20,6 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 from scipy.linalg import orthogonal_procrustes  # noqa: E402
-from scipy.spatial import procrustes  # noqa: E402
 from sklearn.decomposition import PCA  # noqa: E402
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
@@ -73,14 +71,6 @@ def layout(c):
     pca = PCA(n_components=2, random_state=0)
     xy = pca.fit_transform(np.stack(c.vec.values))
     return xy, pca.explained_variance_ratio_
-
-
-def disparity(c_main, xy_main, c_alt, xy_alt):
-    key = lambda c: list(zip(c.subtopic, c.year))
-    a = dict(zip(key(c_main), xy_main))
-    b = dict(zip(key(c_alt), xy_alt))
-    common = [k for k in a if k in b]
-    return procrustes(np.array([a[k] for k in common]), np.array([b[k] for k in common]))[2], len(common)
 
 
 def plot(c, xy, var, path):
@@ -209,12 +199,6 @@ def main():
     plot_panels(c, xy, var, L.FIGURES / "timeline_specter2_panels.png")
     c.assign(pc1=xy[:, 0], pc2=xy[:, 1]).drop(columns=["vec", "raw"]).to_csv(L.RESULTS / "timeline_centroids.csv", index=False)
 
-    # robustness
-    c26 = c[c.year < L.LAST_YEAR].reset_index(drop=True)
-    d26, n26 = disparity(c, xy, c26, layout(c26)[0])
-    c50 = centroids(docs, emb_of_row, 50, YEARS)
-    d50, n50 = disparity(c, xy, c50, layout(c50)[0])
-
     # similarities in the full 768-d space, measured relative to the average cs.IR abstract: SPECTER2 vectors are
     # anisotropic (raw centroid cosines are all 0.95-0.99), so the mean cs.IR vector is subtracted first
     mu = emb_of_row(np.flatnonzero(docs["is_ir"].values)).mean(axis=0)
@@ -252,13 +236,7 @@ def main():
         md.append(f"| {a} ↔ {b} | " + " | ".join(
             f"{float(V[(a, y)] @ V[(b, y)]):.2f}" if (a, y) in V and (b, y) in V else "—" for y in yrs) + " |")
     md += ["", "### Points per subtopic and year (abstracts)", "",
-           c.pivot(index="subtopic", columns="year", values="n").fillna(0).astype(int).to_markdown(), "",
-           "### Robustness of the 2-D layout", "",
-           "Procrustes disparity between the main layout and a refit on a variant, on their common points "
-           "(0 = identical shape up to rotation, scaling and reflection; 1 = unrelated).", "",
-           "| variant | common points | disparity |", "|---|:-:|:-:|",
-           f"| without {L.LAST_YEAR} (partial year) | {n26} | {d26:.3f} |",
-           f"| ≥ 50 abstracts per point | {n50} | {d50:.3f} |", ""]
+           c.pivot(index="subtopic", columns="year", values="n").fillna(0).astype(int).to_markdown(), ""]
     md += w2v_part()
     (L.RESULTS / "timeline.md").write_text("\n".join(md))
     print("\n".join(md))

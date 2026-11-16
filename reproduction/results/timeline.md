@@ -41,15 +41,6 @@ One PCA on all 64 centroids: PC1 explains 44.8% and PC2 20.9% of their variance 
 | query expansion & reformulation |      0 |      0 |      0 |      0 |      0 |      0 |     25 |     25 |     34 |     30 |     23 |     44 |     54 |     88 |    111 |
 | recommender systems             |     64 |     74 |     75 |     91 |    143 |    223 |    340 |    478 |    600 |    745 |    849 |   1127 |   1382 |   1454 |   1388 |
 
-### Robustness of the 2-D layout
-
-Procrustes disparity between the main layout and a refit on a variant, on their common points (0 = identical shape up to rotation, scaling and reflection; 1 = unrelated).
-
-| variant | common points | disparity |
-|---|:-:|:-:|
-| without 2026 (partial year) | 57 | 0.000 |
-| ≥ 50 abstracts per point | 47 | 0.002 |
-
 ## B. word2vec: neighbours and movement across cutoffs (seed 0)
 
 Spaces of different cutoffs are not aligned, so each pair of consecutive cutoffs is aligned by orthogonal Procrustes on the normalized input vectors of their shared vocabulary (HistWords). *Self-similarity* = cosine between a word's aligned vector at T and its vector at the next cutoff; lower = the word's usage moved more. It is compared with the median over all shared words.
