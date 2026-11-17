@@ -35,7 +35,7 @@ async function compare(event) {
     });
 
     $('output').hidden = true;
-    $('status').textContent = 'Comparing... The first comparison loads the collection into memory.';
+    $('status').textContent = 'Comparing... The first comparison loads the collection and models into memory. The first comparison of each collection computes MiniLM embeddings.';
 
     try {
         const params = new URLSearchParams({
@@ -54,9 +54,10 @@ async function compare(event) {
             : 'Note: no relevance judgments are available for this prompt.';
         $('notes-mandatory').textContent = 'Note: Scores use different scales, hence compare ranks not magnitudes.'
 
-        for (const name of ['bm25', 'word2vec']) {
+        for (const name of ['bm25', 'word2vec', 'minilm']) {
             const system = data.systems[name];
-            const termsHtml = '<div class="terms"><span>Query terms: ' +
+            const termsHtml = '<div class="terms"><span>' +
+                (name === 'minilm' ? 'Input tokens: ' : 'Query terms: ') +
                 (system.terms.length ? system.terms.map(term => '<span class="badge">' + esc(term) + '</span>').join(' ')
                 : '<span class="badge">none</span>') + 
                 '</span></div>';
@@ -65,7 +66,9 @@ async function compare(event) {
                 ? '<div class="card">' +
                     (name === 'word2vec'
                         ? 'No usable query vector. The query might contain no in-vocabulary words.'
-                        : 'No matching query terms produced a score.') +
+                        : name === 'minilm'
+                            ? 'No usable sentence embedding scores were returned.'
+                            : 'No matching query terms produced a score.') +
                     ' No ranking is shown.</div>'
                 : system.results.map(doc =>
                     '<article class="card">' +

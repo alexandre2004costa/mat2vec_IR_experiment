@@ -11,8 +11,42 @@ from urllib.parse import parse_qs, urlsplit
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 SYSTEMS = {}
+MINILM_MODEL = None
+MINILM_INDEXES = {}
 LOCK = threading.Lock()
 DATASETS = ('scifact', 'nfcorpus', 'arguana')
+
+
+class MiniLMUnavailable(RuntimeError):
+    pass
+
+
+def minilm_scores(system, text):
+    """Pretrained MiniLM inference; keep document embeddings only in memory."""
+    from sentence_transformers import SentenceTransformer
+    from testbed_demo import testbed
+    global MINILM_MODEL
+    if MINILM_MODEL is None:
+        try:
+            MINILM_MODEL = SentenceTransformer('all-MiniLM-L6-v2',
+                device=testbed.device(), local_files_only=True)
+        except OSError as error:
+            raise MiniLMUnavailable('The pretrained all-MiniLM-L6-v2 model is not available '
+                'in the local Hugging Face cache. See web/README.md; no training is required.') from error
+        MINILM_MODEL.eval()
+    if system.name not in MINILM_INDEXES:
+        # Preserve the same document order as BM25 and Word2Vec.
+        corpus = {doc_id: system.corpus[doc_id] for doc_id in system.ids}
+        MINILM_INDEXES[system.name] = MINILM_MODEL.encode(testbed.doc_texts(corpus),
+            batch_size=64, normalize_embeddings=True, show_progress_bar=True,
+            convert_to_numpy=True)
+    query = MINILM_MODEL.encode([text], normalize_embeddings=True,
+        show_progress_bar=False, convert_to_numpy=True)[0]
+    # Use the encoder's own preprocessing and truncation, including special tokens.
+    inputs = MINILM_MODEL.tokenize([text])
+    token_ids = inputs['input_ids'][0][inputs['attention_mask'][0].bool()].tolist()
+    tokens = MINILM_MODEL.tokenizer.convert_ids_to_tokens(token_ids)
+    return MINILM_INDEXES[system.name] @ query, tokens
 
 
 def search(dataset, query, k):
@@ -26,7 +60,8 @@ def search(dataset, query, k):
         qid = query if query in system.queries else None
         text = system.queries[qid] if qid else query
         labels = system.qrels.get(qid, {}) if qid else {}
-        scores = {'bm25': system.bm(text), 'word2vec': system.ours(text)}
+        scores = {'bm25': system.bm(text), 'word2vec': system.ours(text),
+                  'minilm': minilm_scores(system, text)}
         result = {'query': text, 'query_id': qid, 'dataset': dataset, 'systems': {}}
         for name, (values, terms) in scores.items():
             values = values.copy()
@@ -34,7 +69,8 @@ def search(dataset, query, k):
                 values[np.array(system.ids) == qid] = -np.inf
             order = [int(j) for j in np.argsort(-values, kind='stable') if np.isfinite(values[j])]
             ranks = {system.ids[j]: i + 1 for i, j in enumerate(order)}
-            empty = not terms or not np.any(values[np.isfinite(values)])
+            empty = not order or (name != 'minilm' and
+                (not terms or not np.any(values[np.isfinite(values)])))
             rows = [] if empty else [dict(id=system.ids[j], rank=i + 1,
                 title=system.corpus[system.ids[j]]['title'] or '(Untitled document)',
                 text=system.corpus[system.ids[j]]['text'], score=float(values[j]),
@@ -89,8 +125,13 @@ class Handler(BaseHTTPRequestHandler):
             self.send_error(404)
         except (ValueError, KeyError):
             self.send_json({'error': 'Invalid query parameters.'}, 400)
-        except (ImportError, FileNotFoundError) as error:
-            self.send_json({'error': 'Demo assets are missing. Follow pairs/12-mat2vec/web/README.md to prepare the indexes.',
+        except MiniLMUnavailable as error:
+            self.send_json({'error': str(error)}, 503)
+        except ImportError as error:
+            self.send_json({'error': f'Missing Python dependency: {error}. Run the server in the IR2 environment with the project requirements installed.',
+                            'detail': str(error)}, 503)
+        except FileNotFoundError as error:
+            self.send_json({'error': f'Demo file missing: {error}. See pairs/12-mat2vec/web/README.md.',
                             'detail': str(error)}, 503)
         except Exception:
             import traceback
