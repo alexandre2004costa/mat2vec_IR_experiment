@@ -38,7 +38,7 @@ ___
 Other information:
 - Relevant badges are available only for known test query IDs. 
 - A query with no usable word vector displays an explanation.
-- Scores from BM25 and cosine similarity have different scales. Only compare ranks, not score magnitude.
+- Scores from every method have different scales. Only compare ranks, not score magnitude.
 
 ___
 ___
@@ -49,9 +49,12 @@ ___
 python -m pip install -r pairs/12-mat2vec/requirements.txt
 python -X utf8 pairs/12-mat2vec/method.py --seed 0
 python -X utf8 pairs/12-mat2vec/testbed_demo.py build
+python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('all-MiniLM-L6-v2')"
 ```
 
 Other information:
 - The first comparison always loads the collection, so that later comparisons do not need to reload.
+
+- The first comparison for each collection computes MiniLM document embeddings. This may take a few minutes.
 
 - ArguAna excludes a known query's own document.
